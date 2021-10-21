@@ -1,0 +1,25 @@
+.g-caret {
+    animation-duration: 1s;
+    animation-timing-function: ease;
+    animation-delay: 0s;
+    animation-iteration-count: infinite;
+    animation-direction: normal;
+    animation-fill-mode: none;
+    animation-play-state: running;
+    animation-name: caretFlashSmooth;
+    width: 3px;
+    position: absolute;
+    height: 45px;
+    background-color: #ba68c8;
+    transition: all 0.1s linear;
+}
+
+@keyframes caretFlashSmooth {
+    0%,
+    100% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+}

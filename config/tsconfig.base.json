@@ -11,6 +11,8 @@
         "strict": true,
         "forceConsistentCasingInFileNames": true,
 
+        "resolveJsonModule": true,
+
         "downlevelIteration": true,
         "removeComments": true
     }
