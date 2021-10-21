@@ -23,7 +23,7 @@
     "devDependencies": {
         "@iamyth/logger": "1.0.4",
         "@iamyth/prettier-config": "0.0.1",
-        "@iamyth/webpack-runner": "1.4.2",
+        "@iamyth/webpack-runner": "1.4.4",
         "@types/node": "16.11.1",
         "coil-react-cli": "1.0.2",
         "eslint": "8.0.1",

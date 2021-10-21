@@ -1074,10 +1074,10 @@
   resolved "https://registry.yarnpkg.com/@iamyth/prettier-config/-/prettier-config-0.0.1.tgz#c2dbcde8ea566f0dd453ee94e0d7e60d309a07bc"
   integrity sha512-zUM+iRULvXg94QKL8Tyg/NLvgPbkz39o59R1HCFhPKJDX3RDFYta8AzcCrT8bxWGm6J7l1H542urJvFUkQ0PnA==
 
-"@iamyth/webpack-runner@1.4.2":
-  version "1.4.2"
-  resolved "https://registry.yarnpkg.com/@iamyth/webpack-runner/-/webpack-runner-1.4.2.tgz#7a4f1998d7f6238e4ba7532415ae8562cee54984"
-  integrity sha512-rHVy/kyYm2NGb1f53/CDoP9LG+g0nXLyt3D1m7dK416xusRjVubt8M2R1PgYN8p3LCAWwae+BEOgIp7EadaWGw==
+"@iamyth/webpack-runner@1.4.4":
+  version "1.4.4"
+  resolved "https://registry.yarnpkg.com/@iamyth/webpack-runner/-/webpack-runner-1.4.4.tgz#bb91e39e8f04407b4c7e702d2050861473976898"
+  integrity sha512-cSk4pXKrY+A/ySQUANQgbqIAFw9JO/nklp5pdPZUFGeHoYETu1dSdOZtTUzFBNqWtCisTaPQub3sYqUI2ghU2w==
   dependencies:
     "@babel/core" "7.15.8"
     "@pmmmwh/react-refresh-webpack-plugin" "0.5.1"
