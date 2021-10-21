@@ -3,9 +3,11 @@ node_modules/**
 
 # Build
 dist/**
+build/**
 
 # Caches
 .webpack-cache/**
+profile.json
 
 # OS
 *.DS_Store
