@@ -10,7 +10,14 @@ const initialState: State = {
     quote: null,
     entered: [],
     entering: '',
+    started: false,
+    finished: false,
 };
+
+export const TimerState = Recoil.atom({
+    key: 'TimerState',
+    default: 0,
+});
 
 export const MainState = Recoil.atom({
     key: 'MainState',
@@ -19,19 +26,27 @@ export const MainState = Recoil.atom({
 
 export const useMainAction = () => {
     const { getState, setState } = useCoilState(MainState);
+    const { setState: setTimerState } = useCoilState(TimerState);
     const history = useHistory<any>();
+
+    const reset = () => {
+        setState((state) => {
+            state.entered = [];
+            state.entering = '';
+            state.finished = false;
+            state.started = false;
+        });
+        setTimerState(0);
+    };
 
     const getQuote = () => {
         const quote = QuoteUtil.getQuote(getState().difficulty);
         setState((state) => (state.quote = quote.text));
-    };
-
-    const onMount = () => {
-        getQuote();
+        reset();
     };
 
     const onRouteMatched = (routeParameter: any, location: Location<Readonly<any> | undefined>) => {
-        // TODO
+        getQuote();
     };
 
     const onDifficultyChange = (difficulty: Difficulty) => {
@@ -42,7 +57,25 @@ export const useMainAction = () => {
     };
 
     const changeText = (value: string) => {
-        setState((state) => (state.entering = value));
+        setState((state) => {
+            if (!state.quote) {
+                return;
+            }
+            const splitQuote = state.quote.split(' ');
+            const quoteLength = splitQuote.length;
+            const totalLength = state.entered.length;
+            const quoteLastWord = splitQuote[quoteLength - 1];
+
+            if (!state.entered.length && !state.entering.length) {
+                state.started = true;
+            }
+
+            if (quoteLength === totalLength + 1 && value === quoteLastWord) {
+                state.started = false;
+                state.finished = true;
+            }
+            state.entering = value;
+        });
     };
 
     const updateText = () => {
@@ -67,12 +100,12 @@ export const useMainAction = () => {
     };
 
     return actionHandlers({
-        onMount,
         onRouteMatched,
         onDifficultyChange,
         updateText,
         undoText,
         changeText,
+        reset,
     });
 };
 

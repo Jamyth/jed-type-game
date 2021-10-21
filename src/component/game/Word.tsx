@@ -11,20 +11,36 @@ interface Props {
     setLeft?: (value: number) => void;
 }
 
-export const Word = React.memo(({ content, entered, shouldValidate, isActive, ...handlers }: Props) => {
+export const Word = React.memo(({ content, entered, shouldValidate, isActive, setLeft, setTop }: Props) => {
     const chars = entered?.split('') ?? [];
     const letters = content.split('');
     const hasError = content !== entered;
+    const [container, setContainer] = React.useState<HTMLDivElement | null>(null);
+
+    React.useEffect(() => {
+        if (container && isActive && chars.length === 0) {
+            const { top, left } = container.getBoundingClientRect();
+            setTop?.(top);
+            setLeft?.(left);
+
+            return () => {
+                setTop?.(0);
+                setLeft?.(0);
+            };
+        }
+    }, [container, isActive, entered]);
 
     return (
         <Box
             display="flex"
+            ref={setContainer}
             mr="0.7rem"
             borderBottom={shouldValidate && hasError ? '1px solid #ca4754' : '1px solid transparent'}
         >
             {letters.map((_, i) => (
                 <Letter
-                    {...handlers}
+                    setLeft={setLeft}
+                    setTop={setTop}
                     isLastChar={isActive && i === chars.length - 1}
                     key={i}
                     char={_}
@@ -35,8 +51,9 @@ export const Word = React.memo(({ content, entered, shouldValidate, isActive, ..
                 entered.length > content.length &&
                 [...new Array(entered.length - content.length)].map((_, i) => (
                     <Letter
-                        {...handlers}
-                        isLastChar={isActive && i === chars.length - 1}
+                        setLeft={setLeft}
+                        setTop={setTop}
+                        isLastChar={isActive && i + content.length === chars.length - 1}
                         key={i}
                         char={null}
                         typed={chars[i + content.length]}

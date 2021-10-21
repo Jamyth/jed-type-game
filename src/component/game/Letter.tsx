@@ -16,15 +16,25 @@ export const Letter = React.memo(({ char, typed, isLastChar, setTop, setLeft }: 
     React.useEffect(() => {
         if (isLastChar && div) {
             const { top, left, width, height } = div.getBoundingClientRect();
-            setTop?.(top + height);
+            setTop?.(top);
             setLeft?.(left + width);
         }
+
+        return () => {
+            if (isLastChar) {
+                setTop?.(0);
+                setLeft?.(0);
+            }
+        };
     }, [div, isLastChar]);
 
     return (
         <Box
             ref={setDiv}
             fontSize="1.9rem"
+            sx={{
+                userSelect: 'none',
+            }}
             color={
                 status === 'correct'
                     ? '#ba68c8'

@@ -6,12 +6,15 @@
     animation-direction: normal;
     animation-fill-mode: none;
     animation-play-state: running;
-    animation-name: caretFlashSmooth;
     width: 3px;
-    position: absolute;
+    position: fixed;
     height: 45px;
     background-color: #ba68c8;
     transition: all 0.1s linear;
+
+    &.animate {
+        animation-name: caretFlashSmooth;
+    }
 }
 
 @keyframes caretFlashSmooth {
